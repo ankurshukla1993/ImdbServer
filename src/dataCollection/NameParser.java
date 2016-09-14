@@ -140,7 +140,7 @@ public class NameParser {
 	    movieList = new ArrayList<MovieObject>() ;
 	    
 	    
-	    	for(int i = 0; i < 1; i++){
+	    	for(int i = 0; i < movieLinksList.size(); i++){
 	    		System.out.println("Looping for i = " + i);
 				surl = "" ;
 				surl = "http://www.imdb.com" + movieLinksList.get(i).replaceAll("\"", "") ;
