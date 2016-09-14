@@ -11,12 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import dataCollection.*;
 
 @WebServlet("/ListServer")
 public class ListServer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private List<dataCollection.MovieObject> list = new ArrayList<dataCollection.MovieObject>() ;;
+	private List<dataCollection.MovieObject> list = new ArrayList<dataCollection.MovieObject>() ;
+	private Gson gson = new Gson();
       
     public ListServer() {
         super();
@@ -26,7 +29,6 @@ public class ListServer extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		NameParser n = new NameParser() ;
-		
 		String question = request.getParameter("task") ;
 		if(question.equals("data")){
 			System.out.println("Asked for Data Collection");
@@ -39,8 +41,11 @@ public class ListServer extends HttpServlet {
 			System.out.println("Asked for list");
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
-			out.println(list.toString());
-			System.out.println("\n\nMovie List from Server: \n" + list.toString());
+			//out.println(list.toString());
+			
+			String json = gson.toJson(list);
+			out.println(json);
+			System.out.println("\n\nMovie List from Server: \n" + json);
 		}
 			
 		
